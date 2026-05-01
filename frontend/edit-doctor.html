@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit Doctor - LNMIIT Health Center</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="app-container">
+    
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <h2>LNMIIT<br>Health Center</h2>
+      </div>
+      <ul class="sidebar-nav">
+        <li><a href="index.html">Dashboard</a></li>
+        <li><a href="doctors.html" class="active">All Doctors</a></li>
+        <li><a href="add-doctor.html">Add Doctor</a></li>
+        <li><a href="search.html">Search Specialists</a></li>
+      </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <header class="page-header">
+        <div>
+          <h1>Edit Doctor</h1>
+          <p>Update information for the selected doctor.</p>
+        </div>
+      </header>
+
+      <div id="loader" class="loader"></div>
+      
+      <div class="form-container" id="formContainer" style="display: none;">
+        <form id="editDoctorForm">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="name">Full Name *</label>
+              <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+              <label for="specialization">Specialization *</label>
+              <select id="specialization" name="specialization" required>
+                <option value="" disabled>Select Specialization</option>
+                <option value="General Physician">General Physician</option>
+                <option value="Dentist">Dentist</option>
+                <option value="ENT">ENT</option>
+                <option value="Orthopedic">Orthopedic</option>
+                <option value="Gynecologist">Gynecologist</option>
+                <option value="Dermatologist">Dermatologist</option>
+                <option value="Psychiatrist">Psychiatrist</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="qualification">Qualification *</label>
+              <input type="text" id="qualification" name="qualification" required>
+            </div>
+            <div class="form-group">
+              <label for="experience">Experience (Years) *</label>
+              <input type="number" id="experience" name="experience" min="0" required>
+            </div>
+          </div>
+
+          <div class="form-group" style="margin-bottom: 1.5rem;">
+            <label>Available Days *</label>
+            <div class="checkbox-group" id="daysGroup">
+              <label class="checkbox-label"><input type="checkbox" name="days" value="Monday"> Monday</label>
+              <label class="checkbox-label"><input type="checkbox" name="days" value="Tuesday"> Tuesday</label>
+              <label class="checkbox-label"><input type="checkbox" name="days" value="Wednesday"> Wednesday</label>
+              <label class="checkbox-label"><input type="checkbox" name="days" value="Thursday"> Thursday</label>
+              <label class="checkbox-label"><input type="checkbox" name="days" value="Friday"> Friday</label>
+              <label class="checkbox-label"><input type="checkbox" name="days" value="Saturday"> Saturday</label>
+              <label class="checkbox-label"><input type="checkbox" name="days" value="Sunday"> Sunday</label>
+            </div>
+            <small id="daysError" class="text-danger" style="color: var(--danger-color); display: none; margin-top: 0.5rem;">Please select at least one available day.</small>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="consultationTimings">Consultation Timings *</label>
+              <input type="text" id="consultationTimings" name="consultationTimings" required>
+            </div>
+            <div class="form-group">
+              <label for="roomNumber">Room Number *</label>
+              <input type="text" id="roomNumber" name="roomNumber" required>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="contact">Contact Number *</label>
+              <input type="text" id="contact" name="contact" required>
+            </div>
+            <div class="form-group">
+              <label for="email">Email Address *</label>
+              <input type="email" id="email" name="email" required>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <a href="doctors.html" class="btn btn-outline">Cancel</a>
+            <button type="submit" class="btn btn-primary" id="submitBtn">Update Doctor</button>
+          </div>
+        </form>
+      </div>
+      
+      <div id="errorState" class="empty-state" style="display: none; color: var(--danger-color);">
+        <h3>Doctor not found</h3>
+        <p>The requested doctor could not be loaded or does not exist.</p>
+        <a href="doctors.html" class="btn btn-outline mt-4">Back to Doctors</a>
+      </div>
+    </main>
+  </div>
+
+  <script src="js/edit-doctor.js"></script>
+</body>
+</html>

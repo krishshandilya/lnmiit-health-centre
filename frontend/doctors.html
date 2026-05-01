@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>All Doctors - LNMIIT Health Center</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="app-container">
+    
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <h2>LNMIIT<br>Health Center</h2>
+      </div>
+      <ul class="sidebar-nav">
+        <li><a href="index.html">Dashboard</a></li>
+        <li><a href="doctors.html" class="active">All Doctors</a></li>
+        <li><a href="add-doctor.html">Add Doctor</a></li>
+        <li><a href="search.html">Search Specialists</a></li>
+      </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <header class="page-header">
+        <div>
+          <h1>All Doctors</h1>
+          <p>Manage the complete roster of doctors here.</p>
+        </div>
+        <div>
+          <a href="add-doctor.html" class="btn btn-primary">+ Add New Doctor</a>
+        </div>
+      </header>
+
+      <div class="table-container">
+        <table id="doctorsTable">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Specialization</th>
+              <th>Experience</th>
+              <th>Availability</th>
+              <th>Contact</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="doctorsTableBody">
+            <!-- Rendered by JS -->
+          </tbody>
+        </table>
+        <div id="loader" class="loader"></div>
+        <div id="emptyState" class="empty-state" style="display: none;">
+          <h3>No doctors found</h3>
+          <p>There are no doctors registered in the system yet.</p>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="js/doctors.js"></script>
+</body>
+</html>

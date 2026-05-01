@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - LNMIIT Health Center</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="app-container">
+    
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <h2>LNMIIT<br>Health Center</h2>
+      </div>
+      <ul class="sidebar-nav">
+        <li><a href="index.html" class="active">Dashboard</a></li>
+        <li><a href="doctors.html">All Doctors</a></li>
+        <li><a href="add-doctor.html">Add Doctor</a></li>
+        <li><a href="search.html">Search Specialists</a></li>
+      </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <header class="page-header">
+        <div>
+          <h1>Dashboard</h1>
+          <p>Overview of the Doctor Management Module.</p>
+        </div>
+        <div>
+          <a href="add-doctor.html" class="btn btn-primary">+ Add New Doctor</a>
+        </div>
+      </header>
+
+      <div class="card-grid" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); margin-bottom: 3rem;">
+        <div class="card stat-card">
+          <h3>Total Doctors</h3>
+          <div class="stat-number" id="totalDoctorsCount">-</div>
+        </div>
+        
+        <div class="card" style="display: flex; justify-content: center; align-items: center; flex-direction: column; text-align: center;">
+          <h3 class="mb-2">Find by Specialization</h3>
+          <p class="text-muted mb-4">Quickly filter doctors by their specific domain expertise.</p>
+          <a href="search.html" class="btn btn-outline">Go to Search</a>
+        </div>
+        
+        <div class="card" style="display: flex; justify-content: center; align-items: center; flex-direction: column; text-align: center;">
+          <h3 class="mb-2">Manage Roster</h3>
+          <p class="text-muted mb-4">View the list of all registered doctors, edit details or remove entries.</p>
+          <a href="doctors.html" class="btn btn-secondary">View All Doctors</a>
+        </div>
+      </div>
+
+      <h2>Recently Added</h2>
+      <div id="loader" class="loader"></div>
+      <div class="card-grid" id="recentDoctorsList" style="margin-top: 1.5rem;">
+        <!-- Filled by JS -->
+      </div>
+    </main>
+  </div>
+
+  <script src="js/dashboard.js"></script>
+</body>
+</html>
