@@ -84,8 +84,12 @@
 
           <div class="form-row">
             <div class="form-group">
-              <label for="consultationTimings">Consultation Timings *</label>
-              <input type="text" id="consultationTimings" name="consultationTimings" required>
+              <label>Consultation Timings *</label>
+              <div style="display: flex; gap: 0.5rem; align-items: center;">
+                <input type="time" id="startTime" name="startTime" required style="flex: 1;">
+                <span style="color: rgba(255,255,255,0.7);">to</span>
+                <input type="time" id="endTime" name="endTime" required style="flex: 1;">
+              </div>
             </div>
             <div class="form-group">
               <label for="roomNumber">Room Number *</label>
@@ -96,11 +100,13 @@
           <div class="form-row">
             <div class="form-group">
               <label for="contact">Contact Number *</label>
-              <input type="text" id="contact" name="contact" required>
+              <input type="text" id="contact" name="contact" required pattern="[0-9]{10}" maxlength="10">
+              <small id="contactError" class="text-danger" style="color: var(--danger-color); display: none; margin-top: 0.3rem;">Contact number must be exactly 10 digits.</small>
             </div>
             <div class="form-group">
               <label for="email">Email Address *</label>
               <input type="email" id="email" name="email" required>
+              <small id="emailError" class="text-danger" style="color: var(--danger-color); display: none; margin-top: 0.3rem;">Email must end with @lnmiit.ac.in</small>
             </div>
           </div>
 
