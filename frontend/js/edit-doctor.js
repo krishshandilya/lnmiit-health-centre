@@ -31,6 +31,7 @@ function populateForm(doctor) {
 
   const form = document.getElementById('editDoctorForm');
   
+  form.doctorId.value = doctor.doctorId || '';
   form.name.value = doctor.name;
   form.specialization.value = doctor.specialization;
   form.qualification.value = doctor.qualification;
@@ -68,6 +69,7 @@ document.getElementById('editDoctorForm').addEventListener('submit', async (e) =
   const daysError = document.getElementById('daysError');
   const emailError = document.getElementById('emailError');
   const contactError = document.getElementById('contactError');
+  const idError = document.getElementById('idError');
 
   let hasError = false;
   
@@ -98,9 +100,19 @@ document.getElementById('editDoctorForm').addEventListener('submit', async (e) =
     contactError.style.display = 'none';
   }
 
+  // Validate doctorId pattern
+  const doctorId = form.doctorId.value.trim();
+  if (!/^DOC-\d{3}$/.test(doctorId)) {
+    idError.style.display = 'block';
+    hasError = true;
+  } else {
+    idError.style.display = 'none';
+  }
+
   if (hasError) return;
   
   const doctorData = {
+    doctorId: form.doctorId.value.trim(),
     name: form.name.value.trim(),
     specialization: form.specialization.value,
     qualification: form.qualification.value.trim(),
@@ -113,13 +125,13 @@ document.getElementById('editDoctorForm').addEventListener('submit', async (e) =
   };
 
   const urlParams = new URLSearchParams(window.location.search);
-  const doctorId = urlParams.get('id');
+  const dbId = urlParams.get('id');
 
   try {
     submitBtn.textContent = 'Updating...';
     submitBtn.disabled = true;
 
-    const response = await fetch(`http://localhost:5000/api/doctors/${doctorId}`, {
+    const response = await fetch(`http://localhost:5000/api/doctors/${dbId}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json'

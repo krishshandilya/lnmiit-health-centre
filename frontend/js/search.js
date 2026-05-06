@@ -44,7 +44,7 @@ async function searchDoctors(specialization) {
       html += `
         <div class="card">
           <div class="doctor-card-header">
-            <h3>${doc.name}</h3>
+            <h3>${doc.name} <span style="font-size: 0.9rem; color: var(--text-light); font-family: 'DM Sans', sans-serif;">(${doc.doctorId || 'No ID'})</span></h3>
             <span class="badge ${badgeClass}">${badgeText}</span>
           </div>
           <div class="doctor-card-body">

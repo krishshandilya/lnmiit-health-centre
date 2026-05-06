@@ -4,57 +4,62 @@ const Doctor = require('./models/Doctor');
 
 const sampleDoctors = [
   {
+    doctorId: "DOC-001",
     name: "Dr. Anjali Sharma",
     specialization: "General Physician",
     qualification: "MBBS, MD (Internal Medicine)",
     experience: 12,
     availableDays: ["Monday", "Wednesday", "Friday"],
     consultationTimings: "10:00 AM - 02:00 PM",
-    contact: "+91-9876543210",
+    contact: "9876543210",
     email: "anjali.sharma@lnmiit.ac.in",
     roomNumber: "101"
   },
   {
+    doctorId: "DOC-002",
     name: "Dr. Rajesh Verma",
     specialization: "Orthopedic",
     qualification: "MBBS, MS (Orthopedics)",
     experience: 8,
     availableDays: ["Tuesday", "Thursday", "Saturday"],
     consultationTimings: "11:00 AM - 03:00 PM",
-    contact: "+91-8765432109",
+    contact: "8765432109",
     email: "rajesh.verma@lnmiit.ac.in",
     roomNumber: "102"
   },
   {
+    doctorId: "DOC-003",
     name: "Dr. Meera Patel",
     specialization: "Dentist",
     qualification: "BDS, MDS",
     experience: 5,
     availableDays: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
     consultationTimings: "09:00 AM - 01:00 PM",
-    contact: "+91-7654321098",
+    contact: "7654321098",
     email: "meera.patel@lnmiit.ac.in",
     roomNumber: "103"
   },
   {
+    doctorId: "DOC-004",
     name: "Dr. Vikram Singh",
     specialization: "Psychiatrist",
     qualification: "MBBS, MD (Psychiatry)",
     experience: 15,
     availableDays: ["Friday", "Saturday"],
     consultationTimings: "02:00 PM - 06:00 PM",
-    contact: "+91-6543210987",
+    contact: "6543210987",
     email: "vikram.singh@lnmiit.ac.in",
     roomNumber: "104"
   },
   {
+    doctorId: "DOC-005",
     name: "Dr. Sneha Desai",
     specialization: "Dermatologist",
     qualification: "MBBS, DDVL",
     experience: 6,
     availableDays: ["Wednesday", "Thursday"],
     consultationTimings: "10:30 AM - 01:30 PM",
-    contact: "+91-5432109876",
+    contact: "5432109876",
     email: "sneha.desai@lnmiit.ac.in",
     roomNumber: "105"
   }

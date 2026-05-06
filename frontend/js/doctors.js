@@ -29,7 +29,7 @@ async function fetchDoctors() {
       html += `
         <tr>
           <td>
-            <strong>${doc.name}</strong><br>
+            <strong>${doc.name}</strong> <span style="font-size: 0.85rem; color: var(--text-light);">(${doc.doctorId || 'No ID'})</span><br>
             <small class="text-muted">${doc.qualification}</small>
           </td>
           <td><span class="badge badge-spec">${doc.specialization}</span></td>
