@@ -19,7 +19,7 @@ async function fetchDoctors() {
   const staffCountLabel = document.getElementById('staffCountLabel');
 
   try {
-    const response = await fetch('/api/doctors');
+    const response = await fetch(`${window.API_BASE_URL}/api/doctors`);
     if (!response.ok) throw new Error('Failed to fetch doctor list.');
     
     allDoctors = await response.json();
@@ -132,7 +132,7 @@ function setupSearchFilter() {
 async function deleteDoctor(id, name) {
   if (confirm(`Are you sure you want to delete ${name}? This action cannot be undone.`)) {
     try {
-      const response = await fetch(`/api/doctors/${id}`, {
+      const response = await fetch(`${window.API_BASE_URL}/api/doctors/${id}`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${sessionStorage.getItem('token')}`

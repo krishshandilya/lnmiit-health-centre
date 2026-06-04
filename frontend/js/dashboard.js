@@ -19,7 +19,7 @@ async function fetchDashboardData() {
   const recentList = document.getElementById('recentDoctorsList');
 
   try {
-    const response = await fetch('/api/doctors');
+    const response = await fetch(`${window.API_BASE_URL}/api/doctors`);
     if (!response.ok) throw new Error('Failed to fetch data');
     
     const doctors = await response.json();

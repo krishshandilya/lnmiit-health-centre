@@ -31,7 +31,7 @@ async function searchDoctors(specialization) {
   loader.classList.remove('hidden');
 
   try {
-    const response = await fetch(`/api/doctors/specialization/${encodeURIComponent(specialization)}`);
+    const response = await fetch(`${window.API_BASE_URL}/api/doctors/specialization/${encodeURIComponent(specialization)}`);
     if (!response.ok) throw new Error('Failed to fetch specialization records.');
     
     const doctors = await response.json();

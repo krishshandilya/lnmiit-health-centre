@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   try {
-    const response = await fetch(`/api/doctors/${doctorId}`);
+    const response = await fetch(`${window.API_BASE_URL}/api/doctors/${doctorId}`);
     if (!response.ok) throw new Error('Doctor not found');
     
     const doctor = await response.json();
@@ -159,7 +159,7 @@ document.getElementById('editDoctorForm').addEventListener('submit', async (e) =
     submitBtn.textContent = 'Updating...';
     submitBtn.disabled = true;
 
-    const response = await fetch(`/api/doctors/${dbId}`, {
+    const response = await fetch(`${window.API_BASE_URL}/api/doctors/${dbId}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',

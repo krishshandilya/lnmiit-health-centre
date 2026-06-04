@@ -77,7 +77,7 @@ document.getElementById('addDoctorForm').addEventListener('submit', async (e) =>
     submitBtn.textContent = 'Adding...';
     submitBtn.disabled = true;
 
-    const response = await fetch('/api/doctors', {
+    const response = await fetch(`${window.API_BASE_URL}/api/doctors`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
