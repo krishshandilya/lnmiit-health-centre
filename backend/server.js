@@ -12,10 +12,12 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 // Middleware
+const frontendUrl = process.env.FRONTEND_URL 
+  ? process.env.FRONTEND_URL.replace(/\/$/, '') 
+  : 'http://localhost:5000';
+
 const corsOptions = {
-  origin: process.env.NODE_ENV === 'production' 
-    ? (process.env.FRONTEND_URL || 'http://localhost:5000') 
-    : '*',
+  origin: process.env.NODE_ENV === 'production' ? frontendUrl : '*',
   optionsSuccessStatus: 200
 };
 app.use(cors(corsOptions));
