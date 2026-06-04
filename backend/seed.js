@@ -10,7 +10,7 @@ const sampleDoctors = [
     qualification: "MBBS, MD (Internal Medicine)",
     experience: 12,
     availableDays: ["Monday", "Wednesday", "Friday"],
-    consultationTimings: "10:00 AM - 02:00 PM",
+    consultationTimings: "10:00 - 14:00",
     contact: "9876543210",
     email: "anjali.sharma@lnmiit.ac.in",
     roomNumber: "101"
@@ -22,7 +22,7 @@ const sampleDoctors = [
     qualification: "MBBS, MS (Orthopedics)",
     experience: 8,
     availableDays: ["Tuesday", "Thursday", "Saturday"],
-    consultationTimings: "11:00 AM - 03:00 PM",
+    consultationTimings: "11:00 - 15:00",
     contact: "8765432109",
     email: "rajesh.verma@lnmiit.ac.in",
     roomNumber: "102"
@@ -34,7 +34,7 @@ const sampleDoctors = [
     qualification: "BDS, MDS",
     experience: 5,
     availableDays: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-    consultationTimings: "09:00 AM - 01:00 PM",
+    consultationTimings: "09:00 - 13:00",
     contact: "7654321098",
     email: "meera.patel@lnmiit.ac.in",
     roomNumber: "103"
@@ -46,7 +46,7 @@ const sampleDoctors = [
     qualification: "MBBS, MD (Psychiatry)",
     experience: 15,
     availableDays: ["Friday", "Saturday"],
-    consultationTimings: "02:00 PM - 06:00 PM",
+    consultationTimings: "14:00 - 18:00",
     contact: "6543210987",
     email: "vikram.singh@lnmiit.ac.in",
     roomNumber: "104"
@@ -58,7 +58,7 @@ const sampleDoctors = [
     qualification: "MBBS, DDVL",
     experience: 6,
     availableDays: ["Wednesday", "Thursday"],
-    consultationTimings: "10:30 AM - 01:30 PM",
+    consultationTimings: "10:30 - 13:30",
     contact: "5432109876",
     email: "sneha.desai@lnmiit.ac.in",
     roomNumber: "105"

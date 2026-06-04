@@ -1,67 +1,263 @@
 <!DOCTYPE html>
-<html lang="en">
+<html class="light" lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
   <title>Dashboard - LNMIIT Health Center</title>
-  <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+  
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "surface-container-high": "#e6e8ea",
+            "secondary": "#505f76",
+            "surface-dim": "#d8dadc",
+            "on-secondary-fixed-variant": "#38485d",
+            "surface-container-low": "#f2f4f6",
+            "inverse-primary": "#6bd8cb",
+            "surface-tint": "#006a61",
+            "surface-container": "#eceef0",
+            "inverse-surface": "#2d3133",
+            "on-tertiary": "#ffffff",
+            "on-error-container": "#93000a",
+            "on-secondary-fixed": "#0b1c30",
+            "on-secondary": "#ffffff",
+            "tertiary-fixed-dim": "#ffb59a",
+            "tertiary-container": "#b05e3d",
+            "inverse-on-surface": "#eff1f3",
+            "on-surface": "#191c1e",
+            "error-container": "#ffdad6",
+            "error": "#ba1a1a",
+            "primary-fixed": "#89f5e7",
+            "on-error": "#ffffff",
+            "on-tertiary-fixed-variant": "#773215",
+            "surface": "#f7f9fb",
+            "surface-container-lowest": "#ffffff",
+            "on-surface-variant": "#3d4947",
+            "primary-fixed-dim": "#6bd8cb",
+            "on-background": "#191c1e",
+            "outline-variant": "#bcc9c6",
+            "tertiary-fixed": "#ffdbce",
+            "background": "#f7f9fb",
+            "surface-container-highest": "#e0e3e5",
+            "on-primary-fixed": "#00201d",
+            "surface-bright": "#f7f9fb",
+            "on-primary-fixed-variant": "#005049",
+            "secondary-fixed-dim": "#b7c8e1",
+            "primary-container": "#008378",
+            "outline": "#6d7a77",
+            "on-secondary-container": "#54647a",
+            "primary": "#00685f",
+            "secondary-container": "#d0e1fb",
+            "secondary-fixed": "#d3e4fe",
+            "on-tertiary-container": "#fffbff",
+            "on-primary-container": "#f4fffc",
+            "on-primary": "#ffffff",
+            "on-tertiary-fixed": "#370e00",
+            "tertiary": "#924628",
+            "surface-variant": "#e0e3e5"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "lg": "40px",
+            "margin-mobile": "16px",
+            "xs": "4px",
+            "sm": "12px",
+            "margin-desktop": "48px",
+            "base": "8px",
+            "gutter": "24px",
+            "xl": "64px",
+            "md": "24px"
+          },
+          "fontFamily": {
+            "label-sm": ["Inter"],
+            "body-sm": ["Inter"],
+            "body-md": ["Inter"],
+            "headline-md": ["Inter"],
+            "headline-sm": ["Inter"],
+            "display-lg": ["Inter"],
+            "body-lg": ["Inter"],
+            "headline-lg": ["Inter"],
+            "label-md": ["Inter"],
+            "headline-lg-mobile": ["Inter"]
+          },
+          "fontSize": {
+            "label-sm": ["13px", {"lineHeight": "18px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+            "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+            "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+            "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+            "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+            "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+            "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+            "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+            "label-md": ["15px", {"lineHeight": "22px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+            "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}]
+          }
+        },
+      },
+    }
+  </script>
+  
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #F8FAFC;
+    }
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+    }
+    .card-shadow {
+      box-shadow: 0px 4px 12px rgba(30, 41, 59, 0.05);
+    }
+  </style>
 </head>
-<body>
-  <div class="app-container">
+<body class="bg-surface text-on-surface">
+
+  <!-- SideNavBar Shell -->
+  <aside class="fixed left-0 top-0 w-64 h-screen bg-surface dark:bg-inverse-surface border-r border-outline-variant dark:border-outline flex flex-col p-md overflow-y-auto z-50">
+    <div class="mb-xl">
+      <div class="flex items-center gap-sm">
+        <span class="material-symbols-outlined text-primary text-3xl">clinical_notes</span>
+        <div>
+          <h1 class="font-headline-sm text-headline-sm font-bold text-primary dark:text-inverse-primary leading-tight">LNMIIT</h1>
+          <p class="font-label-sm text-label-sm text-secondary opacity-70">Health Center</p>
+        </div>
+      </div>
+    </div>
     
-    <!-- Sidebar -->
-    <aside class="sidebar">
-      <div class="sidebar-header">
-        <h2>LNMIIT<br>Health Center</h2>
-        <p style="font-size: 0.85rem; color: rgba(255, 255, 255, 0.7); margin-top: 0.5rem; font-family: 'DM Sans', sans-serif; font-weight: 500;">Doctor Management Module</p>
+    <nav class="flex-grow space-y-xs">
+      <!-- Active Tab: Dashboard -->
+      <a class="flex items-center gap-sm p-sm rounded-lg text-primary dark:text-inverse-primary font-bold bg-surface-container-highest dark:bg-secondary-container transition-colors duration-150" href="index.html">
+        <span class="material-symbols-outlined">dashboard</span>
+        <span class="font-label-md text-label-md">Dashboard</span>
+      </a>
+      <a class="flex items-center gap-sm p-sm rounded-lg text-secondary dark:text-secondary-fixed-dim hover:text-primary hover:bg-surface-container-low transition-colors duration-150" href="doctors.html">
+        <span class="material-symbols-outlined">groups</span>
+        <span class="font-label-md text-label-md">All Doctors</span>
+      </a>
+      <a class="flex items-center gap-sm p-sm rounded-lg text-secondary dark:text-secondary-fixed-dim hover:text-primary hover:bg-surface-container-low transition-colors duration-150" href="search.html">
+        <span class="material-symbols-outlined">search</span>
+        <span class="font-label-md text-label-md">Search Specialists</span>
+      </a>
+    </nav>
+    
+    <div class="mt-auto space-y-sm">
+      <a href="add-doctor.html" class="admin-only w-full bg-primary text-on-primary font-label-md text-label-md py-sm rounded-lg hover:opacity-90 transition-opacity flex items-center justify-center gap-xs">
+        <span class="material-symbols-outlined text-[20px]">add</span>
+        <span>Add New Doctor</span>
+      </a>
+      <div class="pt-md border-t border-outline-variant">
+        <a class="public-only flex items-center gap-sm p-sm rounded-lg text-secondary hover:text-primary hover:bg-surface-container-low transition-colors" href="login.html">
+          <span class="material-symbols-outlined">login</span>
+          <span class="font-label-md text-label-md">Admin Login</span>
+        </a>
+        <a id="logoutLink" class="admin-only flex items-center gap-sm p-sm rounded-lg text-secondary hover:text-error hover:bg-error-container/10 transition-colors" href="#">
+          <span class="material-symbols-outlined">logout</span>
+          <span class="font-label-md text-label-md">Logout</span>
+        </a>
       </div>
-      <ul class="sidebar-nav">
-        <li><a href="index.html" class="active">Dashboard</a></li>
-        <li><a href="doctors.html">All Doctors</a></li>
-        <li><a href="add-doctor.html">Add Doctor</a></li>
-        <li><a href="search.html">Search Specialists</a></li>
-      </ul>
-    </aside>
+    </div>
+  </aside>
 
-    <!-- Main Content -->
-    <main class="main-content">
-      <header class="page-header">
+  <!-- Main Content Canvas -->
+  <main class="ml-64 pt-8 min-h-screen">
+    <div class="p-lg max-w-[1440px] mx-auto">
+      
+      <!-- Header Section -->
+      <div class="mb-xl flex justify-between items-start">
         <div>
-          <h1>Dashboard</h1>
-          <p>Overview of the Doctor Management Module.</p>
+          <h3 class="font-headline-lg text-headline-lg text-on-surface mb-xs">Clinic Overview</h3>
+          <p class="font-body-md text-body-md text-secondary">Real-time status of LNMIIT medical staff and consulting rooms.</p>
         </div>
-        <div>
-          <a href="add-doctor.html" class="btn btn-primary">+ Add New Doctor</a>
-        </div>
-      </header>
-
-      <div class="card-grid" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); margin-bottom: 3rem;">
-        <div class="card stat-card">
-          <h3>Total Doctors</h3>
-          <div class="stat-number" id="totalDoctorsCount">-</div>
-        </div>
-        
-        <div class="card" style="display: flex; justify-content: center; align-items: center; flex-direction: column; text-align: center;">
-          <h3 class="mb-2">Find by Specialization</h3>
-          <p class="text-muted mb-4">Quickly filter doctors by their specific domain expertise.</p>
-          <a href="search.html" class="btn btn-outline">Go to Search</a>
-        </div>
-        
-        <div class="card" style="display: flex; justify-content: center; align-items: center; flex-direction: column; text-align: center;">
-          <h3 class="mb-2">Manage Roster</h3>
-          <p class="text-muted mb-4">View the list of all registered doctors, edit details or remove entries.</p>
-          <a href="doctors.html" class="btn btn-secondary">View All Doctors</a>
+        <div class="flex items-center gap-sm mt-1">
+          <span class="admin-only bg-primary-container text-on-primary-container px-sm py-[2px] rounded-full text-label-sm font-bold">Admin Portal</span>
+          <span class="public-only bg-slate-100 text-secondary px-sm py-[2px] rounded-full text-label-sm font-bold">Guest Mode</span>
         </div>
       </div>
 
-      <h2>Recently Added</h2>
-      <div id="loader" class="loader"></div>
-      <div class="card-grid" id="recentDoctorsList" style="margin-top: 1.5rem;">
-        <!-- Filled by JS -->
-      </div>
-    </main>
-  </div>
+      <!-- Stats Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-gutter mb-xl">
+        <!-- Card 1 -->
+        <div class="bg-surface-container-lowest p-md rounded-xl border border-outline-variant card-shadow">
+          <div class="flex items-center justify-between mb-sm">
+            <span class="text-primary font-label-md text-label-md">Total Doctors</span>
+            <span class="material-symbols-outlined text-primary text-2xl">medical_services</span>
+          </div>
+          <div class="font-display-lg text-display-lg text-on-surface" id="totalDoctorsCount">-</div>
+          <div class="mt-xs text-secondary font-label-sm text-label-sm">
+            registered practitioners
+          </div>
+        </div>
 
+        <!-- Card 2 -->
+        <div class="bg-surface-container-lowest p-md rounded-xl border border-outline-variant card-shadow">
+          <div class="flex items-center justify-between mb-sm">
+            <span class="text-primary font-label-md text-label-md">Available Today</span>
+            <span class="material-symbols-outlined text-primary text-2xl">event_available</span>
+          </div>
+          <div class="font-display-lg text-display-lg text-on-surface" id="availableTodayCount">-</div>
+          <div class="mt-xs flex items-center gap-2">
+            <div class="h-2 w-2 rounded-full bg-[#10B981]"></div>
+            <span class="text-secondary font-label-sm text-label-sm" id="availabilityCapacity">0% capacity reached</span>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="bg-surface-container-lowest p-md rounded-xl border border-outline-variant card-shadow">
+          <div class="flex items-center justify-between mb-sm">
+            <span class="text-primary font-label-md text-label-md">Active Rooms</span>
+            <span class="material-symbols-outlined text-primary text-2xl">meeting_room</span>
+          </div>
+          <div class="font-display-lg text-display-lg text-on-surface" id="activeRoomsCount">-</div>
+          <div class="mt-xs text-secondary font-label-sm text-label-sm">
+            consultation rooms occupied
+          </div>
+        </div>
+      </div>
+
+      <!-- Main Layout Grid -->
+      <div class="grid grid-cols-1 gap-gutter">
+        
+        <!-- Full Width: Recent Activity / Newly Added Doctors -->
+        <div class="bg-surface-container-lowest p-lg rounded-xl border border-outline-variant card-shadow">
+          <div class="flex justify-between items-center mb-lg">
+            <div>
+              <h4 class="font-headline-sm text-headline-sm text-on-surface font-semibold">Recently Added Doctors</h4>
+              <p class="text-secondary font-label-sm text-label-sm mt-1">Latest medical professionals joined</p>
+            </div>
+            <a href="doctors.html" class="text-primary hover:text-primary-container font-label-md text-label-md flex items-center gap-xs hover:underline decoration-2 transition-all">
+              <span>View All Doctors</span>
+              <span class="material-symbols-outlined text-sm font-bold">arrow_forward</span>
+            </a>
+          </div>
+          
+          <div id="loader" class="flex justify-center py-xl">
+            <span class="animate-spin material-symbols-outlined text-[#00685f] text-[40px]">progress_activity</span>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-md" id="recentDoctorsList">
+            <!-- Rendered dynamically by JS -->
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <script src="js/auth.js"></script>
   <script src="js/dashboard.js"></script>
 </body>
 </html>

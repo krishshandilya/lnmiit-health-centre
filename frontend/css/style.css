@@ -262,6 +262,19 @@ h1, h2, h3, h4, h5, h6 {
   border-radius: 50%;
 }
 
+.badge-danger {
+  background-color: rgba(211, 47, 47, 0.1);
+  color: var(--danger-color);
+}
+.badge-danger::before {
+  content: '';
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  background-color: var(--danger-color);
+  border-radius: 50%;
+}
+
 /* Forms */
 .form-container {
   background-color: var(--card-bg);
@@ -300,6 +313,21 @@ h1, h2, h3, h4, h5, h6 {
   transition: all var(--transition-speed);
   background-color: #fafafa;
 }
+
+.form-group input[readonly] {
+  background-color: #e9ecef;
+  color: var(--text-light);
+  cursor: not-allowed;
+  border-color: var(--border-color);
+}
+
+.form-group input[readonly]:focus {
+  outline: none;
+  border-color: var(--border-color);
+  box-shadow: none;
+  background-color: #e9ecef;
+}
+
 
 .form-group input:focus,
 .form-group select:focus,

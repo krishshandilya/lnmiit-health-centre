@@ -1,5 +1,9 @@
 const Doctor = require('../models/Doctor');
 
+const escapeRegExp = (string) => {
+  return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+};
+
 // Helper to parse "HH:MM" or "HH:MM AM" to minutes
 const parseTimeToMinutes = (timeStr) => {
   const match = timeStr.match(/(\d+):(\d+)\s*(AM|PM)?/i);
@@ -68,9 +72,10 @@ exports.getDoctorById = async (req, res) => {
 // Get doctors by specialization
 exports.getDoctorsBySpecialization = async (req, res) => {
   try {
-    // using case insensitive search
+    // using case insensitive search with escaped regex characters
+    const escapedSpec = escapeRegExp(req.params.spec);
     const doctors = await Doctor.find({ 
-      specialization: new RegExp(`^${req.params.spec}$`, 'i') 
+      specialization: new RegExp(`^${escapedSpec}$`, 'i') 
     });
     res.json(doctors);
   } catch (error) {
@@ -106,18 +111,25 @@ exports.createDoctor = async (req, res) => {
 // Update doctor
 exports.updateDoctor = async (req, res) => {
   try {
-    const { doctorId, roomNumber, availableDays, consultationTimings } = req.body;
-    
-    // Check doctorId uniqueness
-    const existingDoc = await Doctor.findOne({ doctorId, _id: { $ne: req.params.id } });
-    if (existingDoc) {
-      return res.status(400).json({ message: 'Doctor ID is already taken. Please use a unique ID.' });
+    const doctor = await Doctor.findById(req.params.id);
+    if (!doctor) {
+      return res.status(404).json({ message: 'Doctor not found' });
     }
 
-    // Check room conflict
-    const conflictError = await checkRoomConflict(roomNumber, availableDays, consultationTimings, req.params.id);
-    if (conflictError) {
-      return res.status(400).json({ message: conflictError });
+    // Strip doctorId to ensure it is immutable
+    delete req.body.doctorId;
+
+    // Use values from req.body if provided, otherwise fall back to current database values
+    const roomNumber = req.body.roomNumber !== undefined ? req.body.roomNumber : doctor.roomNumber;
+    const availableDays = req.body.availableDays !== undefined ? req.body.availableDays : doctor.availableDays;
+    const consultationTimings = req.body.consultationTimings !== undefined ? req.body.consultationTimings : doctor.consultationTimings;
+
+    // Check room conflict with merged values
+    if (roomNumber && availableDays && consultationTimings) {
+      const conflictError = await checkRoomConflict(roomNumber, availableDays, consultationTimings, req.params.id);
+      if (conflictError) {
+        return res.status(400).json({ message: conflictError });
+      }
     }
 
     const updatedDoctor = await Doctor.findByIdAndUpdate(
@@ -125,7 +137,6 @@ exports.updateDoctor = async (req, res) => {
       req.body, 
       { new: true, runValidators: true }
     );
-    if (!updatedDoctor) return res.status(404).json({ message: 'Doctor not found' });
     res.json(updatedDoctor);
   } catch (error) {
     res.status(400).json({ message: error.message });

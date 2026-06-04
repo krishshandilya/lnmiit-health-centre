@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   try {
-    const response = await fetch(`http://localhost:5000/api/doctors/${doctorId}`);
+    const response = await fetch(`/api/doctors/${doctorId}`);
     if (!response.ok) throw new Error('Doctor not found');
     
     const doctor = await response.json();
@@ -21,13 +21,30 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 
 function showError() {
-  document.getElementById('loader').style.display = 'none';
-  document.getElementById('errorState').style.display = 'block';
+  const loader = document.getElementById('loader');
+  const errorState = document.getElementById('errorState');
+  if (loader) loader.classList.add('hidden');
+  if (errorState) errorState.classList.remove('hidden');
+}
+
+function convertTo24Hour(timeStr) {
+  const match = timeStr.match(/(\d+):(\d+)\s*(AM|PM)?/i);
+  if (!match) return "";
+  let hours = parseInt(match[1], 10);
+  const minutes = parseInt(match[2], 10);
+  const period = match[3] ? match[3].toUpperCase() : null;
+
+  if (period === 'PM' && hours !== 12) hours += 12;
+  if (period === 'AM' && hours === 12) hours = 0;
+
+  return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}`;
 }
 
 function populateForm(doctor) {
-  document.getElementById('loader').style.display = 'none';
-  document.getElementById('formContainer').style.display = 'block';
+  const loader = document.getElementById('loader');
+  const formContainer = document.getElementById('formContainer');
+  if (loader) loader.classList.add('hidden');
+  if (formContainer) formContainer.classList.remove('hidden');
 
   const form = document.getElementById('editDoctorForm');
   
@@ -37,13 +54,13 @@ function populateForm(doctor) {
   form.qualification.value = doctor.qualification;
   form.experience.value = doctor.experience;
   
-  // Parse existing timings (assuming format "HH:MM - HH:MM")
+  // Parse existing timings (supporting both HH:MM and HH:MM AM/PM formats)
   if (doctor.consultationTimings && doctor.consultationTimings.includes(' - ')) {
     const [start, end] = doctor.consultationTimings.split(' - ');
-    form.startTime.value = start.trim();
-    form.endTime.value = end.trim();
+    form.startTime.value = convertTo24Hour(start.trim());
+    form.endTime.value = convertTo24Hour(end.trim());
   } else {
-    // Fallback if data is in old free-text format
+    // Fallback if data is in old format
     form.startTime.value = '10:00';
     form.endTime.value = '13:00';
   }
@@ -70,43 +87,54 @@ document.getElementById('editDoctorForm').addEventListener('submit', async (e) =
   const emailError = document.getElementById('emailError');
   const contactError = document.getElementById('contactError');
   const idError = document.getElementById('idError');
+  const timingError = document.getElementById('timingError');
 
   let hasError = false;
   
   const checkedDays = Array.from(form.querySelectorAll('input[name="days"]:checked')).map(cb => cb.value);
   
   if (checkedDays.length === 0) {
-    daysError.style.display = 'block';
+    daysError.classList.remove('hidden');
     hasError = true;
   } else {
-    daysError.style.display = 'none';
+    daysError.classList.add('hidden');
   }
 
   // Validate email ends with @lnmiit.ac.in
   const email = form.email.value.trim();
   if (!email.endsWith('@lnmiit.ac.in')) {
-    emailError.style.display = 'block';
+    emailError.classList.remove('hidden');
     hasError = true;
   } else {
-    emailError.style.display = 'none';
+    emailError.classList.add('hidden');
   }
 
   // Validate contact is exactly 10 digits
   const contact = form.contact.value.trim();
   if (!/^\d{10}$/.test(contact)) {
-    contactError.style.display = 'block';
+    contactError.classList.remove('hidden');
     hasError = true;
   } else {
-    contactError.style.display = 'none';
+    contactError.classList.add('hidden');
   }
 
   // Validate doctorId pattern
   const doctorId = form.doctorId.value.trim();
   if (!/^DOC-\d{3}$/.test(doctorId)) {
-    idError.style.display = 'block';
+    idError.classList.remove('hidden');
     hasError = true;
   } else {
-    idError.style.display = 'none';
+    idError.classList.add('hidden');
+  }
+
+  // Validate start time is before end time
+  const startTime = form.startTime.value;
+  const endTime = form.endTime.value;
+  if (startTime && endTime && startTime >= endTime) {
+    timingError.classList.remove('hidden');
+    hasError = true;
+  } else {
+    timingError.classList.add('hidden');
   }
 
   if (hasError) return;
@@ -131,10 +159,11 @@ document.getElementById('editDoctorForm').addEventListener('submit', async (e) =
     submitBtn.textContent = 'Updating...';
     submitBtn.disabled = true;
 
-    const response = await fetch(`http://localhost:5000/api/doctors/${dbId}`, {
+    const response = await fetch(`/api/doctors/${dbId}`, {
       method: 'PUT',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${sessionStorage.getItem('token')}`
       },
       body: JSON.stringify(doctorData)
     });
@@ -144,11 +173,22 @@ document.getElementById('editDoctorForm').addEventListener('submit', async (e) =
       throw new Error(errorData.message || 'Failed to update doctor');
     }
 
-    alert('Doctor updated successfully!');
-    window.location.href = 'doctors.html';
+    if (window.showToast) {
+      window.showToast('Doctor updated successfully!', 'success');
+    } else {
+      alert('Doctor updated successfully!');
+    }
+    
+    setTimeout(() => {
+      window.location.href = 'doctors.html';
+    }, 1500);
 
   } catch (error) {
-    alert('Error: ' + error.message);
+    if (window.showToast) {
+      window.showToast('Error: ' + error.message, 'error');
+    } else {
+      alert('Error: ' + error.message);
+    }
     console.error(error);
   } finally {
     submitBtn.textContent = 'Update Doctor';

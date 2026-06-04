@@ -1,0 +1,10 @@
+{
+  "name": "doctor-management-root",
+  "version": "1.0.0",
+  "description": "Root workspace runner for Doctor Management System",
+  "scripts": {
+    "start": "npm run start --prefix backend",
+    "seed": "npm run seed --prefix backend",
+    "backend:install": "npm install --prefix backend"
+  }
+}

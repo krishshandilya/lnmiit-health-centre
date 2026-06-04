@@ -20,13 +20,53 @@ const doctorSchema = new mongoose.Schema({
   experience: { 
     type: Number, 
     required: true,
+    min: [0, 'Experience cannot be negative'],
     validate: {
       validator: Number.isInteger,
       message: 'Experience must be an integer'
     }
   },
-  availableDays: { type: [String], required: true },
-  consultationTimings: { type: String, required: true },
+  availableDays: { 
+    type: [String], 
+    required: true,
+    validate: {
+      validator: function(v) {
+        if (!Array.isArray(v) || v.length === 0) return false;
+        const validDays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+        return v.every(day => validDays.includes(day));
+      },
+      message: 'Available days must contain at least one day and consist of valid weekdays'
+    }
+  },
+  consultationTimings: { 
+    type: String, 
+    required: true,
+    validate: {
+      validator: function(v) {
+        const [startStr, endStr] = v.split('-');
+        if (!startStr || !endStr) return false;
+        
+        const parseTimeToMinutesLocal = (timeStr) => {
+          const match = timeStr.match(/(\d+):(\d+)\s*(AM|PM)?/i);
+          if (!match) return -1;
+          let hours = parseInt(match[1], 10);
+          const minutes = parseInt(match[2], 10);
+          const period = match[3] ? match[3].toUpperCase() : null;
+          
+          if (period === 'PM' && hours !== 12) hours += 12;
+          if (period === 'AM' && hours === 12) hours = 0;
+          
+          return hours * 60 + minutes;
+        };
+
+        const start = parseTimeToMinutesLocal(startStr.trim());
+        const end = parseTimeToMinutesLocal(endStr.trim());
+        
+        return start !== -1 && end !== -1 && start < end;
+      },
+      message: 'Consultation start time must be before end time'
+    }
+  },
   contact: { 
     type: String, 
     required: true,
@@ -35,7 +75,7 @@ const doctorSchema = new mongoose.Schema({
   email: { 
     type: String, 
     required: true,
-    match: [/.*@lnmiit\.ac\.in$/, 'Email must end with @lnmiit.ac.in']
+    match: [/^[a-zA-Z0-9._%+-]+@lnmiit\.ac\.in$/, 'Email must be a valid address ending with @lnmiit.ac.in']
   },
   roomNumber: { 
     type: String, 
