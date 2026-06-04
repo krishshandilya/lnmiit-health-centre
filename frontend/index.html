@@ -126,7 +126,7 @@
 <body class="bg-surface text-on-surface">
 
   <!-- SideNavBar Shell -->
-  <aside class="fixed left-0 top-0 w-64 h-screen bg-surface dark:bg-inverse-surface border-r border-outline-variant dark:border-outline flex flex-col p-md overflow-y-auto z-50">
+  <aside class="fixed left-0 top-0 w-64 h-screen bg-surface dark:bg-inverse-surface border-r border-outline-variant dark:border-outline flex flex-col p-md overflow-y-auto z-50 transform -translate-x-full md:translate-x-0 transition-transform duration-200 ease-in-out">
     <div class="mb-xl">
       <div class="flex items-center gap-sm">
         <span class="material-symbols-outlined text-primary text-3xl">clinical_notes</span>
@@ -171,9 +171,23 @@
     </div>
   </aside>
 
+  <!-- Mobile Header Bar -->
+  <header class="md:hidden flex items-center justify-between px-md py-sm bg-surface border-b border-outline-variant fixed top-0 left-0 w-full z-40 h-[60px]">
+    <div class="flex items-center gap-sm">
+      <span class="material-symbols-outlined text-primary text-2xl">clinical_notes</span>
+      <div>
+        <h1 class="font-bold text-primary text-sm leading-none">LNMIIT</h1>
+        <p class="text-[10px] text-secondary leading-none">Health Center</p>
+      </div>
+    </div>
+    <button id="mobileMenuBtn" class="p-1 text-[#00685f] focus:outline-none">
+      <span class="material-symbols-outlined text-[28px]">menu</span>
+    </button>
+  </header>
+
   <!-- Main Content Canvas -->
-  <main class="ml-64 pt-8 min-h-screen">
-    <div class="p-lg max-w-[1440px] mx-auto">
+  <main class="ml-0 md:ml-64 pt-[76px] md:pt-8 min-h-screen">
+    <div class="p-sm md:p-lg max-w-[1440px] mx-auto">
       
       <!-- Header Section -->
       <div class="mb-xl flex justify-between items-start">

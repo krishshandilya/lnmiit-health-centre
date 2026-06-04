@@ -125,6 +125,7 @@ window.checkAvailability = function(availableDays, consultationTimings) {
 document.addEventListener('DOMContentLoaded', () => {
   setupAuthUI();
   enforcePageAccess();
+  setupMobileMenu();
 });
 
 function setupAuthUI() {
@@ -156,5 +157,58 @@ function enforcePageAccess() {
   
   if (isBlocked && !window.isAdmin) {
     window.location.href = 'index.html';
+  }
+}
+
+function setupMobileMenu() {
+  const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+  const sidebarMenu = document.querySelector('aside');
+  
+  if (mobileMenuBtn && sidebarMenu) {
+    // Ensure sidebar has the transitions and transforms classes initially
+    sidebarMenu.classList.add('transform', '-translate-x-full', 'md:translate-x-0', 'transition-transform', 'duration-200', 'ease-in-out');
+    
+    // Create backdrop overlay dynamically if it doesn't exist
+    let backdrop = document.getElementById('sidebarBackdrop');
+    if (!backdrop) {
+      backdrop = document.createElement('div');
+      backdrop.id = 'sidebarBackdrop';
+      backdrop.className = 'fixed inset-0 bg-black/40 z-40 hidden transition-opacity duration-200 opacity-0 md:hidden';
+      document.body.appendChild(backdrop);
+    }
+    
+    const toggleSidebar = (show) => {
+      if (show) {
+        sidebarMenu.classList.remove('-translate-x-full');
+        sidebarMenu.classList.add('translate-x-0');
+        backdrop.classList.remove('hidden');
+        setTimeout(() => backdrop.classList.add('opacity-100'), 10);
+      } else {
+        sidebarMenu.classList.remove('translate-x-0');
+        sidebarMenu.classList.add('-translate-x-full');
+        backdrop.classList.remove('opacity-100');
+        setTimeout(() => {
+          backdrop.classList.add('hidden');
+        }, 200);
+      }
+    };
+    
+    mobileMenuBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isHidden = sidebarMenu.classList.contains('-translate-x-full');
+      toggleSidebar(isHidden);
+    });
+    
+    backdrop.addEventListener('click', () => toggleSidebar(false));
+    
+    // Close sidebar on navigation links click (on mobile)
+    const links = sidebarMenu.querySelectorAll('nav a, div a');
+    links.forEach(link => {
+      link.addEventListener('click', () => {
+        if (window.innerWidth < 768) {
+          toggleSidebar(false);
+        }
+      });
+    });
   }
 }
