@@ -1,7 +1,7 @@
 // Auth Session Manager
 const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
 // IMPORTANT: Change the Render URL below to your actual Render backend URL after creating the Render service!
-window.API_BASE_URL = isLocal ? 'http://localhost:5000' : 'https://lnmiit-health-center-api.onrender.com';
+window.API_BASE_URL = isLocal ? 'http://localhost:5000' : 'https://lnmiit-health-centre-api.onrender.com';
 
 window.isAdmin = !!sessionStorage.getItem('token');
 
