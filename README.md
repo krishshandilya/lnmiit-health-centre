@@ -2,6 +2,11 @@
 
 A full-stack web application module built for the **LNMIIT Health Center Management System**. This module is designed to cleanly and efficiently manage the hospital's roster of doctors, including their specializations, availability, and contact details.
 
+## 🌐 Live Deployments
+- **Frontend Application (Vercel):** [https://lnmiit-health-centre.vercel.app](https://lnmiit-health-centre.vercel.app)
+- **Backend API (Render):** [https://lnmiit-health-centre-api.onrender.com](https://lnmiit-health-centre-api.onrender.com)
+
+
 ## 🚀 Features
 
 - **Dashboard Overview:** Quick statistics and a glance at available doctors.
