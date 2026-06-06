@@ -68,7 +68,7 @@ function renderDoctorsTable(doctorsList) {
           <span class="inline-block bg-slate-100 text-[#00685f] text-sm font-semibold px-2.5 py-0.5 rounded">${escapeHTML(doc.specialization)}</span>
         </td>
         <td class="px-gutter py-4 text-sm text-slate-700 font-medium">
-          ${escapeHTML(doc.experience)} Years
+          ${escapeHTML(doc.consultationTimings)}
         </td>
         <td class="px-gutter py-4">
           <div class="flex flex-col gap-1">
