@@ -82,7 +82,7 @@ async function fetchDashboardData() {
     }
     
     // 4. Render 3 recently added doctors
-    const recent = doctors.slice(-3).reverse();
+    const recent = doctors.slice(0, 3);
     
     if (recent.length === 0) {
       recentList.innerHTML = `
